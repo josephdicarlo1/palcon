@@ -1,4 +1,3 @@
-<!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
 <script lang="ts">
   import { invalidateAll } from '$app/navigation';
 	import { parsePlayers, type Player } from '$lib/player.js';
