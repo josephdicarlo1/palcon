@@ -10,9 +10,6 @@
     Simple web UI for your Palworld dedicated server
     <br/>
     <br/>
-    <a href="https://github.com/josephdicarlo1/palcon"><strong>Explore the docs »</strong></a>
-    <br/>
-    <br/>
     <a href="https://github.com/josephdicarlo1/palcon/issues">Report Bug</a>
     .
     <a href="https://github.com/josephdicarlo1/palcon/issues">Request Feature</a>
@@ -46,6 +43,15 @@ I wanted a simple and attractive way to manage my Palworld dedicated server with
 
 ## Getting Started
 
+### Configuration
+
+Environment variables:
+
+* `RCON_HOSTNAME`
+* `RCON_PORT`
+* `RCON_PASSWORD`
+* `HOST` (optional)
+* `PORT` (optional, default: 3000)
 
 ### Installation
 
