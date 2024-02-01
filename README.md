@@ -24,6 +24,9 @@
 - [Built With](#built-with)
 - [Getting Started](#getting-started)
   - [Installation](#installation)
+    - [Docker](#docker)
+    - [Standalone](#standalone)
+    - [Development](#development)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
@@ -54,11 +57,68 @@ Environment variables:
 - `PORT` (optional, default: 3000)
 
 ### Installation
+---
+
+### Docker
 
 1. Clone the repo
 
 ```sh
 git clone https://github.com/josephdicarlo/palcon.git
+cd palcon
+```
+
+2. Build the image
+
+```sh
+# podman works too
+docker build -t palcon:latest .
+```
+
+3. Run the image
+
+```sh
+# podman works too
+docker run -it --rm \
+  -p 3000:3000 \
+  -e RCON_HOSTNAME=palworld.yourserver.com \
+  -e RCON_PORT=25575 \
+  -e RCON_PASSWORD=wowsosecure \
+  palcon:latest
+```
+
+### Standalone
+1. Clone the repo
+
+```sh
+git clone https://github.com/josephdicarlo/palcon.git
+cd palcon
+```
+
+2. Install dependencies
+
+```sh
+npm install
+```
+
+3. Build the application
+
+```sh
+npm run build
+```
+
+4. Run the server
+
+```sh
+node build/index.js
+```
+
+### Development
+1. Clone the repo
+
+```sh
+git clone https://github.com/josephdicarlo/palcon.git
+cd palcon
 ```
 
 2. Install dependencies
