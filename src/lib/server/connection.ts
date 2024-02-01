@@ -1,9 +1,15 @@
 import net from 'net';
 import crypto from 'crypto';
-import { SERVERDATA_AUTH, SERVERDATA_AUTH_RESPONSE, SERVERDATA_EXECCOMMAND, createRequest, readResponse, type RconResponse } from './rcon';
+import {
+  SERVERDATA_AUTH,
+  SERVERDATA_AUTH_RESPONSE,
+  SERVERDATA_EXECCOMMAND,
+  createRequest,
+  readResponse,
+  type RconResponse,
+} from './rcon';
 
 export class RconConnection {
-
   client: net.Socket = new net.Socket();
   connected: boolean = false;
   connectedWithoutError: boolean = false;
@@ -17,7 +23,7 @@ export class RconConnection {
     });
 
     this.client.on('error', (err) => {
-      console.error("RCON:", err);
+      console.error('RCON:', err);
       this.client.destroy(err);
       this.connectedWithoutError = false;
     });
@@ -36,18 +42,17 @@ export class RconConnection {
         try {
           // extra response handler to catch failed authentication, which returns message ID -1
           const res = await this.exec(password, SERVERDATA_AUTH);
-          if(res.id == -1) {
+          if (res.id == -1) {
             throw Error('Authentication failed!');
           }
-          this.authenticated = true
-          if(!this.connectedWithoutError) {
+          this.authenticated = true;
+          if (!this.connectedWithoutError) {
             console.log(`RCON: Connected to ${hostname}:${port}`);
             this.connectedWithoutError = true;
           }
           resolve();
-        }
-        catch (err: any) {
-          console.error("Connection failed", err);
+        } catch (err: any) {
+          console.error('Connection failed', err);
           this.client.destroy(err);
           reject(err);
         }
@@ -55,16 +60,19 @@ export class RconConnection {
     });
   }
 
-  async exec(body: string, type: number = SERVERDATA_EXECCOMMAND, messageId: number = this.randU32Sync()): Promise<RconResponse> {
+  async exec(
+    body: string,
+    type: number = SERVERDATA_EXECCOMMAND,
+    messageId: number = this.randU32Sync()
+  ): Promise<RconResponse> {
     return new Promise((resolve, reject) => {
       try {
         this.callback = async (res: RconResponse) => {
           resolve(res);
         };
         this.client.write(createRequest(type, messageId, body));
-      }
-      catch (err) {
-        console.error("RCON: Command send failed", err);
+      } catch (err) {
+        console.error('RCON: Command send failed', err);
         reject(err);
       }
     });

@@ -1,13 +1,16 @@
 export type Player = {
-  name: string,
-  playerUid: string,
-  steamId: string,
+  name: string;
+  playerUid: string;
+  steamId: string;
 };
 
 export function parsePlayers(data: string) {
-  const playerRows = data.split('\n').slice(1).filter((row) => row != '');
+  const playerRows = data
+    .split('\n')
+    .slice(1)
+    .filter((row) => row != '');
   let players: Array<Player> = [];
-  if(playerRows.length > 0) {
+  if (playerRows.length > 0) {
     players = playerRows.map((row: string) => {
       const values = row.split(',');
       return {

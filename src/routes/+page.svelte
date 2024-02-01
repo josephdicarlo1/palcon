@@ -1,9 +1,9 @@
 <script lang="ts">
   import { invalidateAll } from '$app/navigation';
-	import { parsePlayers, type Player } from '$lib/player.js';
-	import { onMount } from 'svelte';
+  import { parsePlayers, type Player } from '$lib/player.js';
+  import { onMount } from 'svelte';
 
-	export let data;
+  export let data;
 
   onMount(() => {
     const interval = setInterval(() => {
@@ -12,7 +12,6 @@
 
     return () => clearInterval(interval);
   });
-
 </script>
 
 <div class="container h-full mx-auto grid lg:grid-cols-3">

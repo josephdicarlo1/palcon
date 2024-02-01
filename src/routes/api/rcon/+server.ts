@@ -7,12 +7,12 @@ import { json } from '@sveltejs/kit';
 const rconConnection = new RconConnection();
 
 export async function GET() {
-  if(!rconConnection.connected) {
     await rconConnection.connect(RCON_HOSTNAME, Number(RCON_PORT), RCON_PASSWORD);
+  if (!rconConnection.connected) {
   }
 
-  const info = (await rconConnection.exec("Info")).body;
-  const players = (await rconConnection.exec("ShowPlayers")).body;
+  const info = (await rconConnection.exec('Info')).body;
+  const players = (await rconConnection.exec('ShowPlayers')).body;
 
   return json({
     info: info,
