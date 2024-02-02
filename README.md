@@ -57,6 +57,7 @@ Environment variables:
 - `PORT` (optional, default: 3000)
 
 ### Installation
+
 ---
 
 ### Docker
@@ -88,6 +89,7 @@ docker run -it --rm \
 ```
 
 ### Standalone
+
 1. Clone the repo
 
 ```sh
@@ -114,6 +116,7 @@ node build/index.js
 ```
 
 ### Development
+
 1. Clone the repo
 
 ```sh
