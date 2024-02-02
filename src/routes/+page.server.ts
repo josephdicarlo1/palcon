@@ -1,13 +1,24 @@
+import type { ServerInfo } from '$lib/serverinfo';
 import { parsePlayers } from '$lib/player';
+import { error } from '@sveltejs/kit';
 
-export async function load({ fetch }) {
-  const res = await fetch('/api/rcon');
-  const json = await res.json();
-  return {
-    serverName: getServerName(json.info),
-    serverVersion: getVersion(json.info),
-    players: parsePlayers(json.players),
-  };
+export async function load({ fetch }): Promise<ServerInfo> {
+  try {
+    const res = await fetch('/api/rcon');
+    const json = await res.json();
+    if (!res.ok) {
+      console.error(`Server returned ${res.status}: ${res.statusText}`);
+      error(500, 'Failed to request status from server');
+    }
+    return {
+      serverName: getServerName(json.info),
+      serverVersion: getVersion(json.info),
+      players: parsePlayers(json.players),
+    };
+  } catch (err) {
+    console.error('Error trying to fetch:', err);
+    error(500, 'Failed to request status from server');
+  }
 }
 
 const versionRegex = /(?<=\[).+?(?=\])/;
